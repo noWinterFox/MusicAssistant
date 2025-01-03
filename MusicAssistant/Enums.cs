@@ -2,7 +2,7 @@ namespace MusicAssistant;
 
 public enum Note
 {
-    A = 1,
+    A,
     ASharpBFlat,
     B,
     C,
@@ -32,5 +32,6 @@ public enum Mode
 public enum Commands
 {
     Help,
-    Scale
+    Scale,
+    Close
 }

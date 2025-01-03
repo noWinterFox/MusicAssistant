@@ -32,6 +32,10 @@ public abstract class CommandHelper
             case Commands.Scale:
                 Scale.InitiateScale();
                 break;
+            
+            case Commands.Close:
+                CloseProgram();
+                break;
         }
         
         Console.ResetColor();
@@ -42,5 +46,19 @@ public abstract class CommandHelper
     {
         Console.WriteLine("/help - lists all of the tools commands");
         Console.WriteLine("/scale - generates a scale based on a key and mode");
+        Console.WriteLine("/close - closes the program");
     }
+
+    private static void CloseProgram()
+    {
+        for (int i = 3; i > 0; i--)
+        {
+            Console.WriteLine($"closing assistant in {i}...");
+            Thread.Sleep(1000);
+        }
+
+        Program.IsRunning = false;
+    }
+    
+    
 }

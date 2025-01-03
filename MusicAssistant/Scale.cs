@@ -57,8 +57,10 @@ public class Scale
     // scale initiation
     public static void InitiateScale()
     {
+        Console.WriteLine();
         Console.WriteLine("Input a key and mode (e.g. \"C Major\")");
         
+        Console.ResetColor();
         string input = Console.ReadLine();
 
         // split the input
@@ -69,13 +71,9 @@ public class Scale
         
         string inputKey = input.Split()[0].Trim();
         string inputMode = input.Split()[1].Trim();
-        
-        Console.WriteLine($"split input: +{inputKey}+ +{inputMode}+");
 
         Note key = ParseNote(inputKey);
         Mode mode = ParseMode(inputMode);
-        
-        Console.WriteLine($"parsed input: {key} {mode}");
         
         // generate the scale
         GenerateScale(key, mode);
@@ -128,6 +126,8 @@ public class Scale
     // scale generation
     private static void GenerateScale(Note key, Mode mode)
     {
+        NoteScale.Clear(); // prepares scale list
+        
         if (ModeIntervals.TryGetValue(mode, out int[] intervals))
         {
             Note currentNote = key;
@@ -135,10 +135,10 @@ public class Scale
             for (int i = 0; i < intervals.Length; i++)
             {
                 NoteScale.Add(currentNote);
-                currentNote = (Note)(((int)currentNote + intervals[i]) % Enum.GetValues(typeof(Note)).Length); // courtesy of chatGPT, ain't no way I'm thinking of this on my own
+                currentNote = (Note) (((int)currentNote + intervals[i]) % Enum.GetValues(typeof(Note)).Length); // courtesy of chatGPT, ain't no way I'm thinking of this on my own
             }
-            
-            Console.Write($"the {key} {mode} scale:");
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.Write($"the {key} {mode} scale: ");
             
             int count = 0;
             
